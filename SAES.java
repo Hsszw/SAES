@@ -4,17 +4,7 @@ import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-/**
- * java使用AES加密解密 AES-128-ECB加密
- * 与mysql数据库aes加密算法通用
- * 数据库aes加密解密
- * -- 加密
- *    SELECT to_base64(AES_ENCRYPT('www.gowhere.so','jkl;POIU1234++=='));
- *    -- 解密
- *    SELECT AES_DECRYPT(from_base64('Oa1NPBSarXrPH8wqSRhh3g=='),'jkl;POIU1234++==');
- * @author 836508
- *
- */
+
 public class SAES {
 
     // 加密
