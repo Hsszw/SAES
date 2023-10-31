@@ -48,6 +48,56 @@
 ![image](https://github.com/Hsszw/SAES/assets/147220550/436a54c1-7f05-470e-baef-85b2b90f01fc)  
 **4.2 中间相遇攻击**  
 找到了使用相同密钥的明、密文对(一个或多个)，请尝试使用中间相遇攻击的方法找到正确的密钥Key(K1+K2)。  
+public class Attack {
+    public static void main(String[] args) {
+        String plaintext = "www.gowhere.so"; // 要加密的明文
+        String ciphertext = "Oa1NPBSarXrPH8wqSRhh3g==";//要解密的密文
+        // 穷举16位密钥k1
+        for (int k1 = 0; k1 <= 65535; k1++) {
+            String k1Str = Integer.toBinaryString(k1);
+            while (k1Str.length() < 16) {
+                k1Str = "0" + k1Str;
+            }
+
+            try {
+                String ciph_mid = SAES.Encrypt(plaintext, k1Str); // 使用k1加密明文得到密文m
+
+                // 穷举16位密钥k2
+                for (int k2 = 0; k2 <= 65535; k2++) {
+                    String k2Str = Integer.toBinaryString(k2);
+                    while (k2Str.length() < 16) {
+                        k2Str = "0" + k2Str;
+                    }
+
+                    try {
+                        String dec_mid = SAES.Decrypt(ciphertext, k2Str); // 使用k2解密密文得到明文n
+
+                        if (dec_mid.equals(ciph_mid)) {
+                            String key = k1Str + k2Str; // 组成K（k1+k2）
+                            System.out.println("Found key: " + key);
+                            return; // 找到满足条件的k1和k2，结束穷举
+                        }
+                    } catch (Exception e) {
+                        // 解密过程中出现异常，继续穷举下一个k2
+                    }
+                }
+            } catch (Exception e) {
+                // 加密过程中出现异常，继续穷举下一个k1
+            }
+        }
+
+        System.out.println("No matching key found.");
+    }
+}
+使用上述中间相遇攻击算法，在已知一对或多对明密文对的情况下，可调用S-AES加解密算法模块进行中间相遇暴力破解。  
+假设已知对应的明文p与密文c，使用加密算法与循环测试16bit所有密钥加密得到中间密文mid_c,再使用解密算法解密密文c得到中间明文mid_p。若mid_c=mid_p时，将进行加密与解密的密钥k1,k2组成K（k1+k2），即可中间相遇攻击得到密钥K。  
+代码运行结果展示，最终结果显示加密程度高，难以在短时间内暴力破解。  
+![Uploading image.png…]()    
+![Uploading image.png…]()  
+
+
+
+
 **4.3 三重加密**
 将S-AES算法通过三重加密进行扩展，选择使用48bits(K1+K2+K3)的模式进行三重加解密。  
 明文：1001101101101010  
