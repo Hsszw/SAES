@@ -47,7 +47,8 @@
 解密：对密文进行解密。  
 ![image](https://github.com/Hsszw/SAES/assets/147220550/436a54c1-7f05-470e-baef-85b2b90f01fc)  
 **4.2 中间相遇攻击**  
-找到了使用相同密钥的明、密文对(一个或多个)，请尝试使用中间相遇攻击的方法找到正确的密钥Key(K1+K2)。  
+找到了使用相同密钥的明、密文对(一个或多个)，请尝试使用中间相遇攻击的方法找到正确的密钥Key(K1+K2)。   
+
 public class Attack {
     public static void main(String[] args) {
         String plaintext = "www.gowhere.so"; // 要加密的明文
