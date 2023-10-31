@@ -49,17 +49,16 @@
 **4.2 中间相遇攻击**  
 找到了使用相同密钥的明、密文对(一个或多个)，请尝试使用中间相遇攻击的方法找到正确的密钥Key(K1+K2)。   
 
-public class Attack {
-    public static void main(String[] args) {
-        String plaintext = "www.gowhere.so"; // 要加密的明文
-        String ciphertext = "Oa1NPBSarXrPH8wqSRhh3g==";//要解密的密文
-        // 穷举16位密钥k1
-        for (int k1 = 0; k1 <= 65535; k1++) {
-            String k1Str = Integer.toBinaryString(k1);
-            while (k1Str.length() < 16) {
-                k1Str = "0" + k1Str;
-            }
-
+public class Attack {  
+    public static void main(String[] args) {  
+        String plaintext = "www.gowhere.so"; // 要加密的明文  
+        String ciphertext = "Oa1NPBSarXrPH8wqSRhh3g==";//要解密的密文  
+        // 穷举16位密钥k1  
+        for (int k1 = 0; k1 <= 65535; k1++) {  
+            String k1Str = Integer.toBinaryString(k1);  
+            while (k1Str.length() < 16) {  
+                k1Str = "0" + k1Str;  
+            }  
             try {
                 String ciph_mid = SAES.Encrypt(plaintext, k1Str); // 使用k1加密明文得到密文m
 
