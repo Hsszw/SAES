@@ -61,7 +61,22 @@ EpXGhlSAy1XCHzNK75MT2Bqjbk5cglHFKtEhTtE7Wu2ti2W5xVc7mRcDH/XVJmlwpMPTGd0TxrL2Jr/U
 可以发现得出的明密文对相匹配。  
 **第5关：工作模式**  
 基于S-AES算法，使用密码分组链(CBC)模式对较长的明文消息进行加密。注意初始向量(16 bits) 的生成，并需要加解密双方共享。  
-在CBC模式下进行加密，并尝试对密文分组进行替换或修改，然后进行解密，请对比篡改密文前后的解密结果。  
+在CBC模式下进行加密，并尝试对密文分组进行替换或修改，然后进行解密，请对比篡改密文前后的解密结果。
+设置： 
+明文：1001100011001100  
+密钥：100110101001011001101000001010110101101010101100  
+初始向量：1001100111100100  
+密文：  
+EK3bh2n3dxXW3mOsFd1K/i4jkeBhf+iy39iP9GYgTo6arGAOzz9YtOyBFmVhdofBKZVPdE6wBMgCZeOZzlnXRQ==  
+通过CBC模式进行加密：  
+![image](https://github.com/Hsszw/SAES/assets/147220550/6e658dd3-d317-4539-aa90-53bb924990ad)  
+尝试对密文分组进行篡改和替换进，进行解密。  
+修改后的密文：  
+EK5dhjn3dxXW3mOsFd1K/i4jkeBhf+iy39iP9GYgTo6arGAOzz9YtOyBFmVhdofBKZVPdE6wBMgCZeOZsdnXRQ==  
+![image](https://github.com/Hsszw/SAES/assets/147220550/f9946aca-50a6-4746-ae07-5233b207b4c6)  
+发现解密后的结果不匹配，可以知道该模式下的加密比较安全。  
+
+
 
 
 
